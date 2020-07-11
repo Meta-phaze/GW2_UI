@@ -280,6 +280,8 @@ local function GWUseThisLocalization()
     L["NO_GUILD"] = "Sin Hermandad"
     L["AFK_MODE"] = "Modo AFK"
     L["AFK_MODE_DESC"] = "Cuando vayas AFK, visualice la pantalla AFK."
+    L["STREAMLINED_QUESTING"] = "Misiones simplificadas"
+    L["STREAMLINED_QUESTING_DESC"] = "Texto de búsqueda que se muestra como párrafos. Haz clic en el marco de búsqueda para aceptar misiones."
     L["REPAIRD_FOR"] = "Tus objetos han sido reparados por: %s"
     L["REPAIRD_FOR_GUILD"] = "Tus objetos han sido reparados con fondos del banco de hermandad por: %s"
     L["AUTO_REPAIR"] = "Reparación Automática"

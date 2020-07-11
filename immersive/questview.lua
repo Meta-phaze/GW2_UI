@@ -32,14 +32,19 @@ end
 GW.AddForProfiling("questview", "splitIter", splitIter)
 
 local function splitQuest(inputstr)
-    local sep = "[\\.|!|?|>]%s+"
-    inputstr = inputstr:gsub("\n", " ")
+    local sep = ""
+    if GetSetting("STREAMLINED_QUESTING") then
+      sep = "\n"
+    else
+      sep = "[\\.|!|?|>]%s+"
+      inputstr = inputstr:gsub("\n", " ")
+    end
     inputstr = inputstr:gsub(" %s+", " ")
     inputstr = inputstr:gsub("%.%.%.", "…")
     local t = {}
     local i = 1
     for str in splitIter(inputstr, sep) do
-        if str ~= nil and str ~= "" then
+        if str ~= nil and str ~= "" and str ~= "\n" then
             t[i] = str
             i = i + 1
         end
@@ -265,7 +270,27 @@ local function nextGossip()
             GwQuestviewFrameContainerAcceptButton:SetText(L["QUEST_VIEW_SKIP"])
         end
     else
+      if GetSetting("STREAMLINED_QUESTING") == false then
         questTextCompleted()
+      else
+        if questState ~= "COMPLETE" then
+          questTextCompleted()
+          AcceptQuest()
+          CloseQuest()
+        else
+          if (GetNumQuestChoices() <= 1) then
+            GetQuestReward(GetNumQuestChoices())
+            CloseQuest()
+          else
+            if (QuestInfoFrame.itemChoice == 0) then
+              QuestChooseRewardError()
+            else
+              GetQuestReward(QuestInfoFrame.itemChoice)
+              CloseQuest()
+            end
+          end
+        end
+      end
     end
 end
 GW.AddForProfiling("questview", "nextGossip", nextGossip)
@@ -366,7 +391,7 @@ local function setPMUnit(PM, unit, side, is_dead, crace, cgender)
             dirty = 1
         end
     end
-    
+
     if dirty then
         PM:SetPosition(uX, uY, uZ)
         GW.Debug("set pos:", unit, fileid, uX, uY, uZ)

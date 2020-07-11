@@ -3,7 +3,7 @@ local _, GW = ...
 
 local function GWUseThisLocalization()
     local L = GW.L
-    
+
     --Fonts
     L["FONT_NORMAL"] = "Interface/AddOns/GW2_UI/fonts/menomonia.ttf"
     L["FONT_BOLD"] = "Interface/AddOns/GW2_UI/fonts/headlines.ttf"
@@ -11,7 +11,7 @@ local function GWUseThisLocalization()
     L["FONT_NARROW_BOLD"] = "Interface/AddOns/GW2_UI/fonts/menomonia.ttf"
     L["FONT_LIGHT"] = "Interface/AddOns/GW2_UI/fonts/menomonia-italic.ttf"
     L["FONT_DAMAGE"] = "Interface/AddOns/GW2_UI/fonts/headlines.ttf"
-    
+
     --Strings
     L["ACTION_BAR_FADE"] = "Ocultar Barra de Ações"
     L["ACTION_BAR_FADE_DESC"] = "Ocultar Barras de Ações adicionais quando fora de combate."
@@ -280,6 +280,8 @@ local function GWUseThisLocalization()
     L["REPAIRD_FOR_GUILD"] = "Seus itens foram reparados usando fundos do banco da guilda por: %s"
     L["AUTO_REPAIR"] = "Reparar automaticamente"
     L["AUTO_REPAIR_DESC"] = "Reparar automaticamente usando o seguinte método ao visitar um vendedor."
+    L["STREAMLINED_QUESTING"] = "Streamlined Questing"
+    L["STREAMLINED_QUESTING_DESC"] = "Quest test displayed as paragraphs.  Click quest frame to Accept quests."
     L["FADE_GROUP_MANAGE_FRAME"] = "Fade Group Manage Button"
     L["FADE_GROUP_MANAGE_FRAME_DESC"] = "Fade the Group Manage Button when the mouse is not near."
     L["HUD_BACKGROUND"] = "Show HUD background"

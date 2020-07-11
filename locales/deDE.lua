@@ -280,6 +280,8 @@ local function GWUseThisLocalization()
     L["NO_GUILD"] = "Keine Gilde"
     L["AFK_MODE"] = "AFK Modus"
     L["AFK_MODE_DESC"] = "AFK Bildschirm anzeigen wenn du AFK bist."
+    L["STREAMLINED_QUESTING"] = "Gestroomlijnde zoektocht"
+    L["STREAMLINED_QUESTING_DESC"] = "Quest-tekst weergegeven als alinea's. Klik op het missiekader om missies te accepteren."
     L["REPAIRD_FOR"] = "Deine Gegenstände wurden repariert für: %s"
     L["REPAIRD_FOR_GUILD"] = "Deine Gegenstände wurden aus der Gildenbank repariert für: %s"
     L["AUTO_REPAIR"] = "Auto-Reparatur"

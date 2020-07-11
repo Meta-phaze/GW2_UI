@@ -280,6 +280,8 @@ local function GWUseThisLocalization()
     L["NO_GUILD"] = "没有公会"
     L["AFK_MODE"] = "离开模式"
     L["AFK_MODE_DESC"] = "当你离开时显示AFK界面"
+    L["STREAMLINED_QUESTING"] = "Streamlined Questing"
+    L["STREAMLINED_QUESTING_DESC"] = "Quest test displayed as paragraphs.  Click quest frame to Accept quests."
     L["REPAIRD_FOR"] = "装备已修复: %s"
     L["REPAIRD_FOR_GUILD"] = "物品已使用公会银行资金修复: %s"
     L["AUTO_REPAIR"] = "自动修理"

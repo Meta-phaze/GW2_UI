@@ -5,8 +5,8 @@ local function GWUseThisLocalization()
     local L = GW.L
 
     --Fonts
-    L['FONT_NORMAL'] = 'Interface/AddOns/GW2_UI/fonts/menomonia.ttf' 
-    L['FONT_BOLD'] = 'Interface/AddOns/GW2_UI/fonts/headlines.ttf' 
+    L['FONT_NORMAL'] = 'Interface/AddOns/GW2_UI/fonts/menomonia.ttf'
+    L['FONT_BOLD'] = 'Interface/AddOns/GW2_UI/fonts/headlines.ttf'
     L['FONT_NARROW'] = 'Interface/AddOns/GW2_UI/fonts/menomonia.ttf'
     L['FONT_NARROW_BOLD'] = 'Interface/AddOns/GW2_UI/fonts/menomonia.ttf'
     L['FONT_LIGHT'] = 'Interface/AddOns/GW2_UI/fonts/menomonia-italic.ttf'
@@ -279,6 +279,8 @@ local function GWUseThisLocalization()
     L["NO_GUILD"] = "Нет гильдии"
     L["AFK_MODE"] = "Режим АФК"
     L["AFK_MODE_DESC"] = "Отображать специальный экран, когда вы переходите в состояние 'Отсутствует'."
+    L["STREAMLINED_QUESTING"] = "Streamlined Questing"
+    L["STREAMLINED_QUESTING_DESC"] = "Quest test displayed as paragraphs.  Click quest frame to Accept quests."
     L["REPAIRD_FOR"] = "Ремонт обошелся в: %s"
     L["REPAIRD_FOR_GUILD"] = "Ремонт обошелся гильдии в: %s"
     L["AUTO_REPAIR"] = "Автоматический ремонт"

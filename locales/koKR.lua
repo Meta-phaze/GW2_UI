@@ -280,6 +280,8 @@ local function GWUseThisLocalization()
     L["NO_GUILD"] = "길드 없음"
     L["AFK_MODE"] = "자리비움 모드"
     L["AFK_MODE_DESC"] = "자리비움 시 UI가 자리비움모드로 전환됩니다."
+    L["STREAMLINED_QUESTING"] = "Streamlined Questing"
+    L["STREAMLINED_QUESTING_DESC"] = "Quest test displayed as paragraphs.  Click quest frame to Accept quests."
     L["REPAIRD_FOR"] = "자동으로 수리하고 비용을 지불했습니다: %s"
     L["REPAIRD_FOR_GUILD"] = "길드자금으로 수리하고 비용을 지불했습니다: %s"
     L["AUTO_REPAIR"] = "자동 수리"

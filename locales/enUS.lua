@@ -280,6 +280,8 @@ local function GWUseThisLocalization()
     L["NO_GUILD"] = "No Guild"
     L["AFK_MODE"] = "AFK Mode"
     L["AFK_MODE_DESC"] = "When you go AFK display the AFK screen."
+    L["STREAMLINED_QUESTING"] = "Streamlined Questing"
+    L["STREAMLINED_QUESTING_DESC"] = "Quest test displayed as paragraphs.  Click quest frame to Accept quests."
     L["REPAIRD_FOR"] = "Your items have been repaired for: %s"
     L["REPAIRD_FOR_GUILD"] = "Your items have been repaired using guild bank funds for: %s"
     L["AUTO_REPAIR"] = "Auto Repair"

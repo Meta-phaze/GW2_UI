@@ -40,6 +40,7 @@ local function LoadHudPanel(sWindow)
         end
     )
     addOption(p, L["AFK_MODE"], L["AFK_MODE_DESC"], "AFK_MODE")
+    addOption(p, L["STREAMLINED_QUESTING"], L["STREAMLINED_QUESTING_DESC"], "STREAMLINED_QUESTING")
     addOptionSlider(
         p,
         L["HUD_SCALE"],

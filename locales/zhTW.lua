@@ -3,15 +3,15 @@ local _, GW = ...
 
 local function GWUseThisLocalization()
     local L = GW.L
-    
+
     --Fonts
     L["FONT_NORMAL"] = "Interface/AddOns/GW2_UI/fonts/chinese.ttf"
     L["FONT_BOLD"] = "Interface/AddOns/GW2_UI/fonts/chinese.ttf"
     L["FONT_NARROW"] = "Interface/AddOns/GW2_UI/fonts/chinese.ttf"
     L["FONT_NARROW_BOLD"] = "Interface/AddOns/GW2_UI/fonts/chinese.ttf"
     L["FONT_LIGHT"] = "Interface/AddOns/GW2_UI/fonts/chinese.ttf"
-    L["FONT_DAMAGE"] = "Interface/AddOns/GW2_UI/fonts/chinese.ttf"        
-    
+    L["FONT_DAMAGE"] = "Interface/AddOns/GW2_UI/fonts/chinese.ttf"
+
     --Strings
     L["ACTION_BAR_FADE"] = "淡出快捷列"
     L["ACTION_BAR_FADE_DESC"] = "非戰鬥中隱藏額外快捷列。"
@@ -280,6 +280,8 @@ local function GWUseThisLocalization()
     L["REPAIRD_FOR_GUILD"] = "已使用公會資金修理裝備, 共支出: %s"
     L["AUTO_REPAIR"] = "自動修裝"
     L["AUTO_REPAIR_DESC"] = "與商人對話時, 透過下列方式自動修復裝備."
+    L["STREAMLINED_QUESTING"] = "Streamlined Questing"
+    L["STREAMLINED_QUESTING_DESC"] = "Quest test displayed as paragraphs.  Click quest frame to Accept quests."
     L["FADE_GROUP_MANAGE_FRAME"] = "Fade Group Manage Button"
     L["FADE_GROUP_MANAGE_FRAME_DESC"] = "Fade the Group Manage Button when the mouse is not near."
     L["HUD_BACKGROUND"] = "Show HUD background"
