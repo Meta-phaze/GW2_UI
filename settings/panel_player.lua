@@ -44,6 +44,32 @@ local function LoadPlayerPanel(sWindow)
         0,
         {["PLAYER_BUFFS_ENABLED"] = true}
     )
+    addOptionSlider(
+        p,
+        L["PLAYER_BUFF_SIZE"],
+        nil,
+        "PlayerBuffFrame_ICON_SIZE",
+        nil,
+        16,
+        60,
+        nil,
+        0,
+        {["PLAYER_BUFFS_ENABLED"] = true},
+        2
+    )
+    addOptionSlider(
+        p,
+        L["PLAYER_DEBUFF_SIZE"],
+        nil,
+        "PlayerDebuffFrame_ICON_SIZE",
+        nil,
+        16,
+        60,
+        nil,
+        0,
+        {["PLAYER_BUFFS_ENABLED"] = true},
+        2
+    )
     addOptionDropdown(
         p,
         L["PLAYER_BUFFS_GROW"],
@@ -95,6 +121,29 @@ local function LoadPlayerPanel(sWindow)
         nil,
         {"NONE", "PREC", "VALUE", "BOTH"},
         {NONE, STATUS_TEXT_PERCENT, STATUS_TEXT_VALUE, STATUS_TEXT_BOTH},
+        nil,
+        {["HEALTHGLOBE_ENABLED"] = true}
+    )
+
+    addOptionDropdown(
+        p,
+        L["TOTEMBAR_SORTING"],
+        nil,
+        "TotemBar_SortDirection",
+        nil,
+        {"ASC", "DSC"},
+        {L["ASCENDING"], L["DESCENDING"]},
+        nil,
+        {["HEALTHGLOBE_ENABLED"] = true}
+    )
+    addOptionDropdown(
+        p,
+        L["TOTEMBAR_GROW_DIRECTION"],
+        nil,
+        "TotemBar_GrowDirection",
+        nil,
+        {"HORIZONTAL", "VERTICAL"},
+        {L["HORIZONTAL"], L["VERTICAL"]},
         nil,
         {["HEALTHGLOBE_ENABLED"] = true}
     )

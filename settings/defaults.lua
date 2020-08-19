@@ -103,6 +103,12 @@ GW_DEFAULT["LOOTFRAME_POS"]["relativePoint"] = "LEFT"
 GW_DEFAULT["LOOTFRAME_POS"]["xOfs"] = 20
 GW_DEFAULT["LOOTFRAME_POS"]["yOfs"] = -45
 
+GW_DEFAULT["MAILBOX_POSITION"] = {}
+GW_DEFAULT["MAILBOX_POSITION"]["point"] = "TOPLEFT"
+GW_DEFAULT["MAILBOX_POSITION"]["relativePoint"] = "TOPLEFT"
+GW_DEFAULT["MAILBOX_POSITION"]["xOfs"] = 16
+GW_DEFAULT["MAILBOX_POSITION"]["yOfs"] = -116
+
 GW_DEFAULT["RAID_CLASS_COLOR"] = false
 GW_DEFAULT["RAID_STYLE_PARTY"] = false
 GW_DEFAULT["RAID_UNIT_FLAGS"] = "NONE"
@@ -274,6 +280,21 @@ GW_DEFAULT["BNToastPos"]["relativePoint"] = "BOTTOMLEFT"
 GW_DEFAULT["BNToastPos"]["xOfs"] = 78
 GW_DEFAULT["BNToastPos"]["yOfs"] = 246
 
+GW_DEFAULT["TalkingHeadFrame_pos"] = {}
+GW_DEFAULT["TalkingHeadFrame_pos"]["point"] = "BOTTOM"
+GW_DEFAULT["TalkingHeadFrame_pos"]["relativePoint"] = "BOTTOM"
+GW_DEFAULT["TalkingHeadFrame_pos"]["xOfs"] = 0
+GW_DEFAULT["TalkingHeadFrame_pos"]["yOfs"] = 372
+
+GW_DEFAULT["TotemBar_pos"] = {}
+GW_DEFAULT["TotemBar_pos"]["point"] = "TOPRIGHT"
+GW_DEFAULT["TotemBar_pos"]["relativePoint"] = "TOPRIGHT"
+GW_DEFAULT["TotemBar_pos"]["xOfs"] = -500
+GW_DEFAULT["TotemBar_pos"]["yOfs"] = -50
+
+GW_DEFAULT["TotemBar_GrowDirection"] = "HORIZONTAL"
+GW_DEFAULT["TotemBar_SortDirection"] = "ASC"
+
 GW_DEFAULT["AlertPos"] = {}
 GW_DEFAULT["AlertPos"]["point"] = "BOTTOMRIGHT"
 GW_DEFAULT["AlertPos"]["relativePoint"] = "BOTTOMRIGHT"
@@ -349,6 +370,7 @@ GW_DEFAULT["ADDONLIST_SKIN_ENABLED"] = true
 GW_DEFAULT["BINDINGS_SKIN_ENABLED"] = true
 GW_DEFAULT["BLIZZARD_OPTIONS_SKIN_ENABLED"] = true
 GW_DEFAULT["MACRO_SKIN_ENABLED"] = true
+GW_DEFAULT["MAIL_SKIN_ENABLED"] = true
 
 GW_DEFAULT["USE_BATTLEGROUND_HUD"] = true
 
@@ -362,3 +384,5 @@ GW_DEFAULT["ACTIVE_PROFILE"] = nil
 
 GW_DEFAULT["PLAYER_AURA_STYLE"] = "LEGACY"
 GW_DEFAULT["PLAYER_AURA_WRAP_NUM"] = 7
+GW_DEFAULT["PlayerBuffFrame_ICON_SIZE"] = 32
+GW_DEFAULT["PlayerDebuffFrame_ICON_SIZE"] = 32

@@ -1,7 +1,34 @@
 local _, GW = ...
 local v = GW.vernotes
 
-v("5.3.1", [=[
+v("5.3.5-hotfix", [=[
+FIXES
+    - Fix error while dead
+]=])
+
+v("5.3.5", [=[
+NEW
+    - Make bottom left and right multibar moveable
+    - Make Talking Head Frame moveable
+    - Added custom and moveable class totems
+    - Added player and mouse coordinates to Worldmap
+    - Added Inbox skin
+]=])
+
+
+v("5.3.4", [=[
+FIXES
+    - Fix lua error if enter an invalid player de/buff size
+    - Fix petbar auto moving in default position
+]=])
+
+v("5.3.3", [=[
+FIXES
+    - Added option to change player buff and debuff size
+    - Fix error in afk mode
+]=])
+
+v("5.3.2", [=[
 FIXES
     - Fixed "Show Player in Groupframes"
     - Fixed Alertframe issue

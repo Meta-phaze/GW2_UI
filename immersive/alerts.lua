@@ -95,6 +95,7 @@ local function skinAchievementAlert(frame)
     frame.Unlocked:SetTextColor(1, 1, 1)
 
     -- Icon
+    frame.Icon.Texture:SetSize(45, 45)
     frame.Icon.Texture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
     frame.Icon.Overlay:Kill()
 
@@ -148,7 +149,7 @@ local function skinCriteriaAlert(frame)
         frame.Icon.iconBorder:SetAllPoints(frame.Icon.Texture.b)
     end
     frame.Icon.Texture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-    
+    frame.Icon.Texture:SetSize(45, 45)
     --flare
     AddFlare(frame, frame.Icon.Texture.b)
 end
@@ -548,18 +549,21 @@ local function skinDigsiteCompleteAlert(frame)
 
     if not frame.backdrop then
         frame:CreateBackdrop(constBackdropAlertFrame)
-        frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -15, 5)
-        frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 35, 10)
+        frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -15, 0)
+        frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 5, 0)
     end
 
     frame.glow:Kill()
     frame.shine:Kill()
     frame:GetRegions():Hide()
+    frame.DigsiteTypeTexture.b = CreateFrame("Frame", nil, frame)
+    frame.DigsiteTypeTexture.b:SetPoint("TOPLEFT", frame.DigsiteTypeTexture, "TOPLEFT", -2, 2)
+    frame.DigsiteTypeTexture.b:SetPoint("BOTTOMRIGHT", frame.DigsiteTypeTexture, "BOTTOMRIGHT", 2, -2)
+    frame.DigsiteTypeTexture:SetParent(frame.DigsiteTypeTexture.b)
     frame.DigsiteTypeTexture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-    frame.DigsiteTypeTexture:SetDrawLayer("BORDER", 5)
+    frame.DigsiteTypeTexture:SetDrawLayer("ARTWORK", 7)
     frame.DigsiteTypeTexture:ClearAllPoints()
-    frame.DigsiteTypeTexture:SetPoint("LEFT", -10, 5)
-    frame.DigsiteTypeTexture:SetSize(45, 45)
+    frame.DigsiteTypeTexture:SetPoint("LEFT", frame.backdrop, 25,-18)
 end
 
 local function skinNewRecipeLearnedAlert(frame)
@@ -1201,7 +1205,7 @@ local function loadAlterSystemFrameSkins()
     hooksecurefunc(_G.RafRewardDeliveredAlertSystem, "setUpFunction", skinRafRewardDeliveredAlert)
     
     -- Professions
-    hooksecurefunc(_G.DigsiteCompleteAlertSystem, "setUpFunction", skinDigsiteCompleteAlert) --TODO position
+    hooksecurefunc(_G.DigsiteCompleteAlertSystem, "setUpFunction", skinDigsiteCompleteAlert)
     hooksecurefunc(_G.NewRecipeLearnedAlertSystem, "setUpFunction", skinNewRecipeLearnedAlert)
 
     -- Honor
@@ -1227,7 +1231,6 @@ local function loadAlterSystemFrameSkins()
     --Bonus Roll Loot
     skinBonusRollLoot() --TODO: position
 
-    -- check if not our Minimap or Minimap is set to top, if yes we need a anchor Point for the Alerts
     local AlertContainerFrame = CreateFrame("Frame", nil, UIParent)
     AlertContainerFrame:SetSize(300, 5) -- 265
 
@@ -1238,9 +1241,9 @@ local function loadAlterSystemFrameSkins()
     local _, y = AlertContainerFrame:GetCenter()
     local screenHeight = UIParent:GetTop()
     if y > (screenHeight / 2) then
-        GW.RegisterMovableFrame(AlertContainerFrame, GW.L["ALERTFRAMES"] .. " (" .. COMBAT_TEXT_SCROLL_DOWN .. ")", "AlertPos", "VerticalActionBarDummy")
+        GW.RegisterMovableFrame(AlertContainerFrame, GW.L["ALERTFRAMES"] .. " (" .. COMBAT_TEXT_SCROLL_DOWN .. ")", "AlertPos", "VerticalActionBarDummy", {300, 5})
     else
-        GW.RegisterMovableFrame(AlertContainerFrame, GW.L["ALERTFRAMES"] .. " (" .. COMBAT_TEXT_SCROLL_UP .. ")", "AlertPos", "VerticalActionBarDummy")
+        GW.RegisterMovableFrame(AlertContainerFrame, GW.L["ALERTFRAMES"] .. " (" .. COMBAT_TEXT_SCROLL_UP .. ")", "AlertPos", "VerticalActionBarDummy", {300, 5})
     end
 
     AlertContainerFrame:RegisterEvent("PLAYER_LEVEL_UP")

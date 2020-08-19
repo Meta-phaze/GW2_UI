@@ -72,8 +72,8 @@ local function lockableOnClick(self, btn)
     local new_point = GetSetting(settingsName)
     new_point["point"] = point
     new_point["relativePoint"] = relativePoint
-    new_point["xOfs"] = math.floor(xOfs)
-    new_point["yOfs"] = math.floor(yOfs)
+    new_point["xOfs"] = GW.RoundInt(xOfs)
+    new_point["yOfs"] = GW.RoundInt(yOfs)
     SetSetting(settingsName, new_point)
 
     --if 'PlayerBuffFrame' or 'PlayerDebuffFrame', set also the grow direction to default
@@ -118,7 +118,7 @@ local function mover_OnDragStop(self)
         local defaultPoint = GetDefault(settingsName)
         local growDirection = GetSetting(settingsName .. "_GrowDirection")
         local frame = self.gw_frame
-        if defaultPoint.point == new_point.point and defaultPoint.relativePoint == new_point.relativePoint and defaultPoint.xOfs == new_point.xOfs and defaultPoint.yOfs == new_point.yOfs and growDirection == "UP" then
+        if defaultPoint.point == new_point.point and defaultPoint.relativePoint == new_point.relativePoint and defaultPoint.xOfs == new_point.xOfs and defaultPoint.yOfs == new_point.yOfs and (growDirection and growDirection == "UP") then
             frame.isMoved = false
             frame:SetAttribute("isMoved", false)
         else
@@ -146,16 +146,11 @@ local function mover_OnDragStop(self)
 end
 GW.AddForProfiling("index", "mover_OnDragStop", mover_OnDragStop)
 
-local function RegisterMovableFrame(frame, displayName, settingsName, dummyFrame, lockAble, isMoved)
+local function RegisterMovableFrame(frame, displayName, settingsName, dummyFrame, size, lockAble, isMoved)
     local moveframe = CreateFrame("Frame", nil, UIParent, dummyFrame)
     frame.gwMover = moveframe
-    if frame == GameTooltip then
-        moveframe:SetSize(230, 80)
-    elseif settingsName == "AlertPos" then
-        moveframe:SetSize(300, 5)
-    elseif displayName == SHOW_BUFFS or displayName == SHOW_DEBUFFS then
-        moveframe:SetSize(316, displayName == SHOW_BUFFS and 100 or 60) 
-        moveframe:SetScale(frame:GetScale())
+    if size then
+        moveframe:SetSize(unpack(size))
     else
         moveframe:SetSize(frame:GetSize())
     end
@@ -533,10 +528,7 @@ local function adjustFixedAnchors(self, relativeAlert)
         local pt, relTo, relPt, xOf, _ = self.anchorFrame:GetPoint()
         local name = self.anchorFrame:GetName()
         if pt == "BOTTOM" and relTo:GetName() == "UIParent" and relPt == "BOTTOM" then
-            if name == "TalkingHeadFrame" then
-                self.anchorFrame:ClearAllPoints()
-                self.anchorFrame:SetPoint(pt, relTo, relPt, xOf, GwAlertFrameOffsetter:GetHeight())
-            elseif name == "GroupLootContainer" then
+            if name == "GroupLootContainer" then
                 self.anchorFrame:ClearAllPoints()
                 if TalkingHeadFrame and TalkingHeadFrame:IsShown() then
                     self.anchorFrame:SetPoint(pt, relTo, relPt, xOf, GwAlertFrameOffsetter:GetHeight() + 140)
@@ -717,7 +709,7 @@ local function loadAddon(self)
         GW.SkinReadyCheck()
     end
     if GetSetting("TALKINGHEAD_SKIN_ENABLED") then
-        GW.SkinTalkingHeadFrame()
+        GW.SkinAndPositionTalkingHeadFrame()
     end
     if GetSetting("TIMERTRACKER_SKIN_ENABLED") then
         GW.SkinTimerTrackerFrame()
@@ -740,6 +732,13 @@ local function loadAddon(self)
     if GetSetting("MACRO_SKIN_ENABLED") then
         GW.SkinMacroOptions()
     end
+    if GetSetting("MAIL_SKIN_ENABLED") then
+        GW.SkinMail()
+    end
+    
+    
+
+    GW.AddCoordsToWorldMap()
 
     --Create hud art
     GW.LoadHudArt()

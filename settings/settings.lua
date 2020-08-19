@@ -183,12 +183,13 @@ local function AddOption(panel, name, desc, optionName, callback, params, depend
 end
 GW.AddOption = AddOption
 
-local function AddOptionSlider(panel, name, desc, optionName, callback, min, max, params, decimalNumbers, dependence)
+local function AddOptionSlider(panel, name, desc, optionName, callback, min, max, params, decimalNumbers, dependence, step)
     local opt = AddOption(panel, name, desc, optionName, callback, params, dependence, dependence_value)
 
     opt["min"] = min
     opt["max"] = max
     opt["decimalNumbers"] = decimalNumbers or 0
+    opt["step"] = step
     opt["optionType"] = "slider"
 
     return opt
@@ -471,6 +472,8 @@ local function InitPanel(panel)
         if v.optionType == "slider" then
             of.slider:SetMinMaxValues(v.min, v.max)
             of.slider:SetValue(GetSetting(v.optionName, v.perSpec))
+            if v.step then of.slider:SetValueStep(v.step) end
+            of.slider:SetObeyStepOnDrag(true)
             of.slider:SetScript(
                 "OnValueChanged",
                 function(self)
@@ -487,12 +490,16 @@ local function InitPanel(panel)
             of.input:SetScript(
                 "OnEnterPressed",
                 function(self)
-                    local roundValue = RoundDec(self:GetNumber(), v.decimalNumbers) or 0
+                    local roundValue = RoundDec(self:GetNumber(), v.decimalNumbers) or v.min
 
                     self:ClearFocus()
                     if tonumber(roundValue) > v.max then self:SetText(v.max) end
                     if tonumber(roundValue) < v.min then self:SetText(v.min) end
-                    roundValue = RoundDec(self:GetNumber(), v.decimalNumbers) or 0
+                    roundValue = RoundDec(self:GetNumber(), v.decimalNumbers) or v.min
+                    if v.step and v.step > 0 then
+                        local min_value = v.min or 0
+                        roundValue = floor((roundValue - min_value) / v.step + 0.5) * v.step + min_value
+                    end
                     self:GetParent().slider:SetValue(roundValue)
                     self:SetText(roundValue)
                     SetSetting(v.optionName, roundValue, v.perSpec)

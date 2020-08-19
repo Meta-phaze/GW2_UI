@@ -602,6 +602,25 @@ local function powerArcane(self, event, ...)
 end
 GW.AddForProfiling("classpowers", "powerArcane", powerArcane)
 
+local function powerFrost(self, event, ...)
+    local _, count, duration, expires = findBuff("player", 205473)
+
+    if not count then count = 0 end
+
+    local old power = self.gwPower
+    old_power = old_power or -1
+
+    local p = count
+
+    self.gwPower = count
+    self.background:SetTexCoord(0, 1, 0.125 * 5, 0.125 *( 5+ 1))
+    self.fill:SetTexCoord(0, 1, 0.125 * p, 0.125 * (p + 1))
+
+    if old_power < count and count > 0 and event ~= "CLASS_POWER_INIT" then
+        animFlare(self, 32, -16, 2, true)
+    end
+end
+
 local function setMage(f)
     if GW.myspec == 1 then -- arcane
         if GetSetting("XPBAR_ENABLED") then
@@ -627,6 +646,26 @@ local function setMage(f)
         powerArcane(f, "CLASS_POWER_INIT")
         f:RegisterUnitEvent("UNIT_MAXPOWER", "player")
         f:RegisterUnitEvent("UNIT_POWER_FREQUENT", "player")
+
+        return true
+    elseif GW.myspec == 3 then --frost
+        f:SetHeight(32)
+        f:SetWidth(256)
+        f.background:SetHeight(32)
+        f.background:SetWidth(256)
+        f.background:SetTexture("Interface\\AddOns\\GW2_UI\\textures\\altpower\\frostmage-altpower")
+        f.background:SetTexCoord(0, 1, 0.125 * 5, 0.125 * (5 + 1))
+        f.flare:SetTexture("Interface\\AddOns\\GW2_UI\\textures\\altpower\\arcane-flash")
+        f.flare:SetWidth(128)
+        f.flare:SetHeight(128)
+        f.fill:SetHeight(32)
+        f.fill:SetWidth(256)
+        f.fill:SetTexture("Interface\\AddOns\\GW2_UI\\textures\\altpower\\frostmage-altpower")
+        f.background:SetVertexColor(0, 0, 0, 0.5)
+
+        f:SetScript("OnEvent", powerFrost)
+        powerFrost(f, "CLASS_POWER_INIT")
+        f:RegisterUnitEvent("UNIT_AURA", "player")
 
         return true
     end
@@ -881,7 +920,9 @@ local function setDruid(f)
         return true
     elseif barType == "combo|little_mana" then
         setComboBar(f)
-        setLittleManaBar(f)
+        if f.ourPowerBar then
+            setLittleManaBar(f)
+        end
         return true
     else
         return false
@@ -901,7 +942,9 @@ local function selectType(f)
     f.disc:Hide()
     f.decay:Hide()
     f.exbar:Hide()
-    f.lmb:Hide()
+    if f.ourPowerBar then
+        f.lmb:Hide()
+    end
     f.gwPower = -1
     local showBar = false
 
@@ -974,20 +1017,24 @@ local function LoadClassPowers()
 
     cpf.ourTarget = GetSetting("TARGET_ENABLED")
     cpf.comboPointsOnTarget = GetSetting("target_HOOK_COMBOPOINTS")
+    cpf.ourPowerBar = GetSetting("POWERBAR_ENABLED")
 
-    -- create an extra mana power bar that is used sometimes (feral druid in cat form)
-    local lmb = CreateFrame("Frame", nil, GwPlayerPowerBar, "GwPlayerPowerBar")
-    cpf.lmb = lmb
-    lmb.candy.spark:ClearAllPoints()
-    lmb:SetSize(GwPlayerPowerBar:GetWidth(), 5)
-    lmb.bar:SetHeight(5)
-    lmb.candy:SetHeight(5)
-    lmb.candy.spark:SetHeight(5)
-    lmb.statusBar:SetHeight(5)
-    lmb:ClearAllPoints()
-    lmb:SetPoint("TOPLEFT", "GwPlayerPowerBar", "TOPLEFT", 0, 5)
-    lmb:SetFrameStrata("MEDIUM")
-    lmb.statusBar.label:SetFont(DAMAGE_TEXT_FONT, 8)
+    -- create an extra mana power bar that is used sometimes (feral druid in cat form) only if your Powerbar is on
+    if cpf.ourPowerBar then
+        local lmb = CreateFrame("Frame", nil, GwPlayerPowerBar, "GwPlayerPowerBar")
+        GW.MixinHideDuringPetAndOverride(lmb)
+        cpf.lmb = lmb
+        lmb.candy.spark:ClearAllPoints()
+        lmb:SetSize(GwPlayerPowerBar:GetWidth(), 5)
+        lmb.bar:SetHeight(5)
+        lmb.candy:SetHeight(5)
+        lmb.candy.spark:SetHeight(5)
+        lmb.statusBar:SetHeight(5)
+        lmb:ClearAllPoints()
+        lmb:SetPoint("TOPLEFT", "GwPlayerPowerBar", "TOPLEFT", 0, 5)
+        lmb:SetFrameStrata("MEDIUM")
+        lmb.statusBar.label:SetFont(DAMAGE_TEXT_FONT, 8)
+    end
 
     -- create an extra mana power bar that is used sometimes
     local exbar = CreateFrame("Frame", nil, cpf, "GwPlayerPowerBar")

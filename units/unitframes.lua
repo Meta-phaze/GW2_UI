@@ -53,7 +53,7 @@ local function createNormalUnitFrame(ftype)
 
     f.prestigebg:SetPoint("CENTER", f.prestigeString, "CENTER", -1, 1)
 
-    f.portrait:SetMask(186178)
+    --f.portrait:SetMask(186178)
 
     f.healthValue = 0
 
@@ -318,12 +318,9 @@ local function updateRaidMarkers(self, event)
 end
 GW.AddForProfiling("unitframes", "updateRaidMarkers", updateRaidMarkers)
 
-local function setUnitPortrait(self, event)
-    if self.portrait == nil then
-        return
-    end
+local function setUnitPortrait(self)
     SetPortraitTexture(self.portrait, self.unit)
-    self.activePortrait = ""
+    self.activePortrait = nil
 end
 GW.AddForProfiling("unitframes", "setUnitPortrait", setUnitPortrait)
 
@@ -388,7 +385,7 @@ local function hideCastBar(self, event)
     self.castingbarBackground:SetPoint("TOPLEFT", self.powerbarBackground, "BOTTOMLEFT", -2, 19)
 
     if self.portrait ~= nil then
-        setUnitPortrait(self, event)
+        setUnitPortrait(self)
     end
 
     if animations["GwUnitFrame" .. self.unit .. "Cast"] ~= nil then
@@ -418,10 +415,10 @@ local function updateCastValues(self, event)
 
     self.castingString:SetText(name)
 
-    --if texture ~= nil and self.portrait ~= nil and (self.activePortrait == nil or self.activePortrait ~= texture) then
-    --    self.portrait:SetTexture(texture)
-    --    self.activePortrait = texture
-    --end
+    if texture ~= nil and self.portrait ~= nil and (self.activePortrait == nil or self.activePortrait ~= texture) then
+        self.portrait:SetTexture(texture)
+        self.activePortrait = texture
+    end
 
     self.castingbarBackground:Show()
     self.castingbarBackground:SetPoint("TOPLEFT", self.powerbarBackground, "BOTTOMLEFT", -2, -1)

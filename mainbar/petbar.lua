@@ -192,26 +192,12 @@ local function updatePetFrameLocation()
     if not fPet or InCombatLockdown() then
         return
     end
-    local fMover = GwPlayerPetFrameMoveAble
-    local fBar = GwMultiBarBottomLeft
+    local fBar = MultiBarBottomLeft
     fPet:ClearAllPoints()
-    if fMover then
-        if not fMover.IsMoving then
-            fMover:ClearAllPoints()
-        else
-            fMover = nil
-        end
-    end
     if fBar and fBar.gw_FadeShowing then
         fPet:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", -53, 212)
-        if fMover then
-            fMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", -53, 212)
-        end
     else
         fPet:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", -53, 120)
-        if fMover then
-            fMover:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", -53, 120)
-        end
     end
 end
 GW.AddForProfiling("petbar", "updatePetFrameLocation", updatePetFrameLocation)
@@ -275,7 +261,7 @@ local function updatePetData(self, event, unit)
 end
 GW.AddForProfiling("petbar", "updatePetData", updatePetData)
 
-local function LoadPetFrame()
+local function LoadPetFrame(lm)
     -- disable default PetFrame stuff
     PetFrame:UnregisterAllEvents()
     PetFrame:SetScript("OnUpdate", nil)
@@ -324,7 +310,9 @@ local function LoadPetFrame()
 
     updatePetData(playerPetFrame, "UNIT_PET", "player")
 
-    if GetSetting("PETBAR_LOCKED") == true then
+    RegisterMovableFrame(playerPetFrame, PET, "pet_pos", "GwPetFrameDummy", nil, true, true)
+
+    if not playerPetFrame.isMoved then
         AddActionBarCallback(updatePetFrameLocation)
         updatePetFrameLocation()
     else
@@ -338,8 +326,8 @@ local function LoadPetFrame()
         )
     end
 
-    setPetBar(playerPetFrame)
+    lm:RegisterPetFrame(playerPetFrame)
 
-    RegisterMovableFrame(playerPetFrame, PET, "pet_pos", "GwPetFrameDummy", "PETBAR_LOCKED")
+    setPetBar(playerPetFrame)
 end
 GW.LoadPetFrame = LoadPetFrame
