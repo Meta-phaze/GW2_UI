@@ -44,7 +44,7 @@ local function splitQuest(inputstr)
     local t = {}
     local i = 1
     for str in splitIter(inputstr, sep) do
-        if str ~= nil and str ~= "" and str ~= "\n" then
+        if str ~= nil and string.len(str) > 2 then
             t[i] = str
             i = i + 1
         end
